@@ -1,22 +1,24 @@
 package com.example.redparking_pos
 
-import io.flutter.embedding.android.FlutterActivity
-import io.flutter.embedding.engine.FlutterEngine
-import io.flutter.plugin.common.MethodChannel
 import android.content.Intent
+import io.flutter.embedding.android.FlutterEngine
+import io.flutter.embedding.android.FlutterFragmentActivity
+import io.flutter.plugin.common.MethodChannel
+import org.json.JSONObject
 import android.content.pm.PackageManager
+import android.app.Activity
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import org.json.JSONObject
 
-class MainActivity: FlutterActivity() {
+
+class MainActivity : FlutterFragmentActivity() {
     private val CHANNEL = "payment_channel"
     private var paymentResult: MethodChannel.Result? = null
 
     private val paymentLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        handlePaymentResult(result)
+    ) { result: ActivityResult -> 
+        handlePaymentResult(result) 
     }
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
@@ -60,11 +62,11 @@ class MainActivity: FlutterActivity() {
                 action = "android.intent.action.SEND"
                 type = "text/json"
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                
+
                 val jsonData = JSONObject(paymentData)
                 putExtra("android.intent.extra.TEXT", jsonData.toString())
             }
-            
+
             if (packageManager.resolveActivity(intent, 0) != null) {
                 paymentLauncher.launch(intent)
             } else {
@@ -77,11 +79,11 @@ class MainActivity: FlutterActivity() {
 
     private fun handlePaymentResult(result: ActivityResult) {
         when (result.resultCode) {
-            RESULT_OK -> {
+            Activity.RESULT_OK -> {
                 val response = result.data?.getStringExtra("paymentResponse") ?: "{}"
                 paymentResult?.success(response)
             }
-            RESULT_CANCELED -> {
+            Activity.RESULT_CANCELED -> {
                 handlePaymentError("CANCELLED", "La transacción fue cancelada")
             }
             else -> {

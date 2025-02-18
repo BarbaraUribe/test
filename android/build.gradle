@@ -3,10 +3,13 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        flatDir {
+            dirs 'libs'
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:8.2.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.10"
     }
 }
 
@@ -14,6 +17,14 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+        flatDir {
+            dirs 'libs'
+        }
+    }
+    configurations.all {
+        resolutionStrategy {
+            exclude group: 'io.flutter', module: 'flutter_embedding_debug' // exclude debug version
+        }
     }
 }
 

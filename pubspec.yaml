@@ -14,16 +14,16 @@ dependencies:
   provider: ^6.0.0
   http: ^1.2.2
   intl: ^0.20.2
-  flutter_svg: ^2.0.9  # Actualizado a una versión compatible
-  android_intent_plus: ^5.3.0  # Asegúrate de usar la última versión
-  permission_handler: ^11.3.0  # Agregado para manejar permisos
+  flutter_svg: ^2.0.9
+  android_intent_plus: ^5.3.0
+  permission_handler: ^11.3.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   integration_test:
     sdk: flutter
-  mockito: 5.4.4
+  mockito: ^5.4.5
   flutter_lints: ^5.0.0
 
 flutter:

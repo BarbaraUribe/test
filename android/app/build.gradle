@@ -35,9 +35,10 @@ android {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.10"  // Actualizado a 1.8.10
-    implementation 'androidx.activity:activity-ktx:1.8.1'           // Actualizado a versión más reciente
-    implementation 'androidx.fragment:fragment-ktx:1.7.1'           // Actualizado a versión más reciente
+    implementation files('libs/flutter_embedding_release-1.0.0.jar')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.10"
+    implementation "androidx.activity:activity-ktx:1.9.3"
+    implementation "androidx.fragment:fragment-ktx:1.8.5"
 }
 
 flutter {
